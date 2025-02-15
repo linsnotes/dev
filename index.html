@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Device Detector</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .device-info {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Device Detector</h1>
+    <p class="device-info" id="device-info">Detecting device...</p>
+
+    <script>
+        function detectDevice() {
+            let userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            let deviceType = "Unknown Device";
+
+            if (/android/i.test(userAgent)) {
+                deviceType = "Android Phone";
+            } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                deviceType = "iOS (iPhone or iPad)";
+            } else if (/Windows NT/i.test(userAgent)) {
+                deviceType = "Windows PC";
+            } else if (/Macintosh/i.test(userAgent) && !/iPhone|iPad/.test(userAgent)) {
+                deviceType = "Mac PC";
+            } else if (/Linux/i.test(userAgent)) {
+                deviceType = "Linux PC";
+            }
+
+            document.getElementById("device-info").innerText = `You are using: ${deviceType}`;
+        }
+
+        detectDevice();
+    </script>
+</body>
+</html>
